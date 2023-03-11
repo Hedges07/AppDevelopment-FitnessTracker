@@ -1,4 +1,4 @@
-# AppDevelpopmentFitnessApp 
+# AppDevelopmentFitnessTracker 
 4200 Project
 Fitness App 
 
