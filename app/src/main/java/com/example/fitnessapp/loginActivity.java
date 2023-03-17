@@ -1,4 +1,4 @@
-package com.example.project_login;
+package com.example.fitnessapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,7 +42,7 @@ public class loginActivity extends AppCompatActivity {
                         boolean insert = DB.insertData(username,password);
                         if (insert) {
                             Toast.makeText(getApplicationContext(),"Registered",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(loginActivity.this, HomePageActivity.class);
+                            Intent intent = new Intent(loginActivity.this, homeActivity.class);
                         }
                         else {
                             Toast.makeText(getApplicationContext(),"Registration Failed",Toast.LENGTH_SHORT).show();
@@ -68,7 +68,7 @@ public class loginActivity extends AppCompatActivity {
                     Boolean checkUserPass = DB.checkPassword(username,password);
                     if(checkUserPass) {
                         Toast.makeText(getApplicationContext(),"Logged In",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(loginActivity.this, HomePageActivity.class);
+                        Intent intent = new Intent(loginActivity.this, homeActivity.class);
                         startActivity(intent);
                     }
                     else {

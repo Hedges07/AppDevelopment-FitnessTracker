@@ -1,4 +1,4 @@
-package com.example.project_login;
+package com.example.fitnessapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
