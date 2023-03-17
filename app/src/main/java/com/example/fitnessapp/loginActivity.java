@@ -42,7 +42,7 @@ public class loginActivity extends AppCompatActivity {
                         boolean insert = DB.insertData(username,password);
                         if (insert) {
                             Toast.makeText(getApplicationContext(),"Registered",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(loginActivity.this, homeActivity.class);
+                            Intent intent = new Intent(loginActivity.this, MainActivity.class);
                         }
                         else {
                             Toast.makeText(getApplicationContext(),"Registration Failed",Toast.LENGTH_SHORT).show();
@@ -68,7 +68,7 @@ public class loginActivity extends AppCompatActivity {
                     Boolean checkUserPass = DB.checkPassword(username,password);
                     if(checkUserPass) {
                         Toast.makeText(getApplicationContext(),"Logged In",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(loginActivity.this, homeActivity.class);
+                        Intent intent = new Intent(loginActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
                     else {
