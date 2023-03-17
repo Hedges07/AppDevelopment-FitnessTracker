@@ -22,6 +22,7 @@
         android:id="@+id/button2"
         android:layout_width="151dp"
         android:layout_height="151dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="88dp"
         android:layout_marginEnd="48dp"
         android:background="@color/lightBlue"
@@ -29,6 +30,7 @@
         android:text="LEGS"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
@@ -65,12 +67,14 @@
         android:layout_height="151dp"
         android:layout_marginStart="49dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="11dp"
         android:layout_marginBottom="155dp"
         android:background="@color/lightBlue"
         android:fontFamily="sans-serif-light"
         android:text="BACK"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
