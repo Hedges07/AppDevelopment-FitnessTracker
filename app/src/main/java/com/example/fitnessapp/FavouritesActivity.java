@@ -1,55 +1,35 @@
 package com.example.fitnessapp;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
+
 import com.google.android.material.navigation.NavigationView;
-import java.util.ArrayList;
 
+public class FavouritesActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    CardView cardView;
-    RecyclerView recyclerView;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        RecyclerView recycler = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recycler.setLayoutManager(layoutManager);
-        ArrayList<CategoryData> arrayList = new ArrayList<>();
-        arrayList.add(new CategoryData("Arms"));
-        arrayList.add(new CategoryData("Legs"));
-        arrayList.add(new CategoryData("Back"));
-        arrayList.add(new CategoryData("Chest"));
-
-        MyAdapter adapter = new MyAdapter(arrayList, MainActivity.this);
-        recycler.setAdapter(adapter);
-
-        Intent intent_favorite = new Intent(MainActivity.this, FavouritesActivity.class);
-        Intent intent_tracker = new Intent(MainActivity.this, TrackerActivity.class);
-
+        setContentView(R.layout.activity_favourites);
+        Intent intent = getIntent();
+        Intent intent_home = new Intent(FavouritesActivity.this, MainActivity.class);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         NavigationView navView = findViewById(R.id.navbar);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 String itemTitle = item.getTitle().toString();
-                if(itemTitle.equals("Favourites")){
-                    startActivity(intent_favorite);
+                if(itemTitle.equals("Home")){
+                    startActivity(intent_home); //temp
                 }
                 DrawerLayout drawer = findViewById(R.id.my_drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
