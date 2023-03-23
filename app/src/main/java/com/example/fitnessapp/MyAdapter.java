@@ -34,7 +34,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CategoryData datalist = data.get(position);
         holder.textView.setText(datalist.getText());
-        holder.car
+        holder.cardView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                if(holder.textView.getText() == "Arms")
+                {
+                    //do something
+                }
+                else if(holder.textView.getText() == "Legs"){
+                    //do something else
+                }
+                else if(holder.textView.getText() == "Chest"){
+
+                }
+                else if(holder.textView.getText() == "Back"){
+                    
+                }
+            }
+        });
     }
 
 
@@ -45,6 +63,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
+        CardView cardView;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textView2);

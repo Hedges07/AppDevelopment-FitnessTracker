@@ -39,7 +39,7 @@ public class loginActivity extends AppCompatActivity {
                 else {
                     boolean checkUser = DB.checkUsername(username);
                     if (checkUser == false) {
-                        boolean insert = DB.insertData(username,password);
+                        boolean insert = DB.insertUsernamePassword(username,password);
                         if (insert) {
                             Toast.makeText(getApplicationContext(),"Registered",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(loginActivity.this, MainActivity.class);
