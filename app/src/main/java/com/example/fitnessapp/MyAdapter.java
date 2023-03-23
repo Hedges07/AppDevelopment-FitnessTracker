@@ -34,6 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CategoryData datalist = data.get(position);
         holder.textView.setText(datalist.getText());
+        holder.car
     }
 
 

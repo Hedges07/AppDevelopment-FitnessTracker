@@ -12,6 +12,18 @@
         android:theme="@style/Theme.FitnessApp"
         tools:targetApi="31">
         <activity
+            android:name=".BackWorkouts"
+            android:exported="false" />
+        <activity
+            android:name=".ChestWorkouts"
+            android:exported="false" />
+        <activity
+            android:name=".LegWorkouts"
+            android:exported="false" />
+        <activity
+            android:name=".ArmWorkouts"
+            android:exported="false" />
+        <activity
             android:name=".FavouritesActivity"
             android:exported="false" />
         <activity
