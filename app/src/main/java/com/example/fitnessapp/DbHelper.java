@@ -41,7 +41,7 @@ public class DbHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public boolean checkUsername (String username) {
+    public boolean checkUsername(String username) {
         SQLiteDatabase db= this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * from users WHERE username=?", new String[] {username});
         if(cursor.getCount() > 0) {
@@ -51,7 +51,7 @@ public class DbHelper extends SQLiteOpenHelper {
             return false;
         }
     }
-    public boolean checkPassword (String username,String password) {
+    public boolean checkUsernamePassword(String username,String password) {
         SQLiteDatabase db= this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM users WHERE username=? AND password=?", new String[] {username,password});
         if(cursor.getCount() > 0) {
@@ -60,5 +60,6 @@ public class DbHelper extends SQLiteOpenHelper {
         else {
             return false;
         }
+
     }
 }

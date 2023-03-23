@@ -49,7 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
                 }
                 else if(holder.textView.getText() == "Back"){
-                    
+
                 }
             }
         });
