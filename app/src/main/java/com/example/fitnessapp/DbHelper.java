@@ -16,7 +16,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE table users(username TEXT, password TEXT)");
-        db.execSQL("CREATE table workouts(username TEXT, description TEXT)");
+        db.execSQL("CREATE table workouts(username TEXT, description TEXT, date TEXT)");
         db.execSQL("CREATE table favWorkouts(username TEXT, description TEXT)");
     }
 
@@ -28,11 +28,12 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertWorkouts(String username, String description) {
+    public boolean insertWorkouts(String username, String description, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", username);
         values.put("description", description);
+        values.put("date", date);
 
         long result = db.insert("workouts", null, values);
 
@@ -43,20 +44,6 @@ public class DbHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-
-
-    //Create like star button on workout that does to add favorite workouts
-    /*
-    DbHelper DB;
-    DB = new DbHelper(this);
-
-    *  onclick DB.insertFavWorkouts(username, "Curl");
-    *
-    *
-
-    To View database goto App Inspection at bottom of screen and open the database files,
-    I can make something to get the workouts from the db if you want
-    * */
 
     public boolean insertFavWorkouts(String username, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
