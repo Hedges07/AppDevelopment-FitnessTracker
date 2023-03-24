@@ -1,6 +1,7 @@
 package com.example.fitnessapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,16 +41,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             public void onClick(View view){
                 if(holder.textView.getText() == "Arms")
                 {
-                    //do something
+                    //go to arms
+                    Intent intent_arm = new Intent(context,ArmWorkouts.class);
+                    context.startActivity(intent_arm);
                 }
                 else if(holder.textView.getText() == "Legs"){
-                    //do something else
+                    //go to legs
+                    Intent intent_leg = new Intent(context,LegWorkouts.class);
+                    context.startActivity(intent_leg);
                 }
-                else if(holder.textView.getText() == "Chest"){
-
+                else if(holder.textView.getText() == "Chest")
+                {
+                    //go to chest
+                    Intent intent_chest = new Intent(context,ChestWorkouts.class);
+                    context.startActivity(intent_chest);
                 }
-                else if(holder.textView.getText() == "Back"){
-
+                else if(holder.textView.getText() == "Back")
+                {
+                    //go to back
+                    Intent intent_back = new Intent(context,BackWorkouts.class);
+                    context.startActivity(intent_back);
                 }
             }
         });
