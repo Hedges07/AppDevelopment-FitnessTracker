@@ -16,7 +16,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE table users(username TEXT, password TEXT)");
-        db.execSQL("CREATE table workouts(username TEXT, description TEXT)");
+        db.execSQL("CREATE table workouts(username TEXT, description TEXT)"); // Add time to workouts
         db.execSQL("CREATE table favWorkouts(username TEXT, description TEXT)");
     }
 
@@ -44,7 +44,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-
+    //TO MARINA FOR CHIRSTMAS
     //Create like star button on workout that does to add favorite workouts
     /*
     DbHelper DB;
