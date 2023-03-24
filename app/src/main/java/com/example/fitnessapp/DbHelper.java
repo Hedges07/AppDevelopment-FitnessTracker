@@ -16,19 +16,68 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE table users(username TEXT, password TEXT)");
-        db.execSQL("CREATE table workouts(name TEXT, description TEXT)");
+        db.execSQL("CREATE table workouts(username TEXT, description TEXT)");
+        db.execSQL("CREATE table favWorkouts(username TEXT, description TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists users");
         db.execSQL("drop table if exists workouts");
+        db.execSQL("drop table if exists favWorkouts");
+        onCreate(db);
+    }
+
+    public boolean insertWorkouts(String username, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", username);
+        values.put("description", description);
+
+        long result = db.insert("workouts", null, values);
+
+        if (result == -1) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+
+    //Create like star button on workout that does to add favorite workouts
+    /*
+    DbHelper DB;
+    DB = new DbHelper(this);
+
+    *  onclick DB.insertFavWorkouts(username, "Curl");
+    *
+    *
+
+    To View database goto App Inspection at bottom of screen and open the database files,
+    I can make something to get the workouts from the db if you want
+    * */
+
+    public boolean insertFavWorkouts(String username, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", username);
+        values.put("description", description);
+
+        long result = db.insert("FavWorkouts", null, values);
+
+        if (result == -1) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public boolean insertUsernamePassword(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
+        ContentValues values2 = new ContentValues();
         values.put("username", username);
         values.put("password", password);
 

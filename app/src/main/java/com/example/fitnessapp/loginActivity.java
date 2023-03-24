@@ -13,7 +13,9 @@ public class loginActivity extends AppCompatActivity {
     //Switch switch_remember;
     TextView tv_username, tv_password;
     String username, password;
-    //boolean remember;
+
+    String description;
+    //boolean remember; // I plan on doing this eventually
     DbHelper DB;
 
     @Override
@@ -60,6 +62,7 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 username = tv_username.getText().toString();
                 password = tv_password.getText().toString();
+                //DB.insertWorkouts(username, "Curls");  //This adds a sample workout when loggin in
 
                 if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
                     Toast.makeText(getApplicationContext(),"Please Enter All Fields",Toast.LENGTH_SHORT).show();  ;
