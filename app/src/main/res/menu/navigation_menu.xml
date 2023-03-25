@@ -4,8 +4,8 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/nav_account"
-        android:title="My Account" />
+        android:id="@+id/nav_history"
+        android:title="Workout History" />
 
     <item
         android:id="@+id/nav_home"
