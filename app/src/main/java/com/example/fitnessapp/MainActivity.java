@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
 
         Intent intent_favorite = new Intent(MainActivity.this, FavouritesActivity.class);
-        Intent intent_tracker = new Intent(MainActivity.this, TrackerActivity.class);
+        Intent intent_history = new Intent(MainActivity.this, HistoryActivity.class);
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
         NavigationView navView = findViewById(R.id.navbar);
@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 String itemTitle = item.getTitle().toString();
                 if(itemTitle.equals("Favourites")){
                     startActivity(intent_favorite);
+                }
+                if(itemTitle.equals("Workout History"))
+                {
+                    startActivity(intent_history);
                 }
                 DrawerLayout drawer = findViewById(R.id.my_drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

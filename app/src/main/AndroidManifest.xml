@@ -12,6 +12,9 @@
         android:theme="@style/Theme.FitnessApp"
         tools:targetApi="31">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".BackWorkouts"
             android:exported="false" />
         <activity
@@ -25,9 +28,6 @@
             android:exported="false" />
         <activity
             android:name=".FavouritesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TrackerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
