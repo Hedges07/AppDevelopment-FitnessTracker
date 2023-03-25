@@ -35,32 +35,72 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CategoryData datalist = data.get(position);
         holder.textView.setText(datalist.getText());
+        Intent intent_workout = new Intent(context,workout_view.class);
+
         holder.cardView.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view){
-                if(holder.textView.getText() == "Arms")
+            public void onClick(View view)
+            {
+                switch(holder.textView.getText().toString())
                 {
-                    //go to arms
-                    Intent intent_arm = new Intent(context,ArmWorkouts.class);
-                    context.startActivity(intent_arm);
-                }
-                else if(holder.textView.getText() == "Legs"){
-                    //go to legs
-                    Intent intent_leg = new Intent(context,LegWorkouts.class);
-                    context.startActivity(intent_leg);
-                }
-                else if(holder.textView.getText() == "Chest")
-                {
-                    //go to chest
-                    Intent intent_chest = new Intent(context,ChestWorkouts.class);
-                    context.startActivity(intent_chest);
-                }
-                else if(holder.textView.getText() == "Back")
-                {
-                    //go to back
-                    Intent intent_back = new Intent(context,BackWorkouts.class);
-                    context.startActivity(intent_back);
+                    //Categories
+                    case "Arms":
+                        Intent intent_arm = new Intent(context,ArmWorkouts.class);
+                        context.startActivity(intent_arm);
+                        break;
+
+                    case "Legs":
+                        Intent intent_leg = new Intent(context,LegWorkouts.class);
+                        context.startActivity(intent_leg);
+                        break;
+
+                    case "Chest":
+                        Intent intent_chest = new Intent(context,ChestWorkouts.class);
+                        context.startActivity(intent_chest);
+                        break;
+
+                    case "Back":
+                        Intent intent_back = new Intent(context,BackWorkouts.class);
+                        context.startActivity(intent_back);
+                        break;
+
+                    //WORKOUTS
+                    case "Bicep Curls":
+                        intent_workout.putExtra("workout_title", "Bicep Curls");
+                        intent_workout.putExtra("workout_video", "bicep_curls");
+                        intent_workout.putExtra("workout_description", "To do a biceps curl with a dumbbell, hold a dumbbell with your palm facing upward. Slowly curl the weight up by bending your elbow, keeping your elbow close to your body. Then slowly lower the weight to the starting position.");
+                        context.startActivity(intent_workout);
+                        break;
+
+                    case "Preacher Curls":
+                        intent_workout.putExtra("workout_title", "Preacher Curls");
+                        intent_workout.putExtra("workout_video", "preacher_curls");
+                        intent_workout.putExtra("workout_description", "The preacher curl is performed with a bench that is designed for you to sit down with your upper arms resting on a surface that is slightly tilted inwards. This biceps curl variation allows you to hone in on the biceps while not using any other part of your body.");
+                        context.startActivity(intent_workout);
+                        break;
+
+                    case "Tricep Pushdown":
+                        intent_workout.putExtra("workout_title", "Tricep Pushdown");
+                        intent_workout.putExtra("workout_video", "tricep_pushdown");
+                        intent_workout.putExtra("workout_description", "A tricep pushdown is an isolation exercise designed to target your triceps muscles. Perform tricep pushdowns by standing in front of a pulley machine with your feet shoulder-width apart.");
+                        context.startActivity(intent_workout);
+                        break;
+
+                    case "Skull Crushers":
+                        intent_workout.putExtra("workout_title", "Skull Crushers");
+                        intent_workout.putExtra("workout_video", "skull_crushers");
+                        intent_workout.putExtra("workout_description", "To do skull crushers, lie on your back with a dumbbell in your hand. Point your upper arm toward the ceiling, with your elbow bent to 90 degrees. Slowly straighten the elbow, moving the weight upward. Then slowly lower the weight to the starting position.");
+                        context.startActivity(intent_workout);
+                        break;
+
+                    case "Hammer Curls":
+                        intent_workout.putExtra("workout_title", "Hammer Curls");
+                        intent_workout.putExtra("workout_video", "hammer_curl");
+                        intent_workout.putExtra("workout_description", "Keep your back straight and your elbows against your sides. Bend your left elbow, bringing the dumbbell up toward your right chest/shoulder. Your palm will be facing your chest. Pause for a 1–2 count, and then slowly lower the dumbbell back to the starting position at your side.");
+                        context.startActivity(intent_workout);
+                        break;
+
                 }
             }
         });

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class ArmWorkouts extends AppCompatActivity {
 
-    CardView cardView;
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +21,15 @@ public class ArmWorkouts extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewWorkouts);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        ArrayList<ArmData> arrayListArms = new ArrayList<ArmData>();
-        arrayListArms.add(new ArmData("Bicep Curls"));
-        arrayListArms.add(new ArmData("Preacher Curls"));
-        arrayListArms.add(new ArmData("Triceps Push Down"));
-        arrayListArms.add(new ArmData("Skull Crushers"));
-        arrayListArms.add(new ArmData("Hammer Curls"));
+        ArrayList<CategoryData> arrayListArms = new ArrayList<CategoryData>();
+        arrayListArms.add(new CategoryData("Bicep Curls"));
+        arrayListArms.add(new CategoryData("Preacher Curls"));
+        arrayListArms.add(new CategoryData("Triceps Pushdown"));
+        arrayListArms.add(new CategoryData("Skull Crushers"));
+        arrayListArms.add(new CategoryData("Hammer Curls"));
 
-        //MyAdapter adapterTwo = new MyAdapter(arrayListArms, ArmWorkouts.this);
-
+        MyAdapter adapterTwo = new MyAdapter(arrayListArms, ArmWorkouts.this);
+        recyclerView.setAdapter(adapterTwo);
 
     }
 }
