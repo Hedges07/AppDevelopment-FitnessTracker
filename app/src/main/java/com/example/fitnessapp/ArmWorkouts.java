@@ -21,7 +21,7 @@ public class ArmWorkouts extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewWorkouts);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        ArrayList<CategoryData> arrayListArms = new ArrayList<CategoryData>();
+        ArrayList<CategoryData> arrayListArms = new ArrayList<>();
         arrayListArms.add(new CategoryData("Bicep Curls"));
         arrayListArms.add(new CategoryData("Preacher Curls"));
         arrayListArms.add(new CategoryData("Triceps Pushdown"));
