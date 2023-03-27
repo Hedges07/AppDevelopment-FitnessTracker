@@ -38,6 +38,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ListView
+            android:id="@+id/lv_history"
+            android:layout_width="384dp"
+            android:layout_height="408dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="194dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

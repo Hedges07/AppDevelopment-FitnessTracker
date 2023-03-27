@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     CardView cardView;
     RecyclerView recyclerView;
+
+    public static String username;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -25,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
 
+        if(intent.hasExtra("userID"))
+        {
+            username = intent.getStringExtra("userID");
+        }
 
         RecyclerView recycler = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -64,8 +72,10 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
-
+    public static String getUsername(){
+        return username;
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
