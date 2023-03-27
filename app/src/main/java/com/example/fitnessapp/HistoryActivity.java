@@ -10,17 +10,36 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
     Button btn_add;
+
+    EditText et_workout, et_sets, et_reps, et_date;
+
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+
+
+
+    DbHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +50,11 @@ public class HistoryActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.my_drawer_layout);
         NavigationView navView = findViewById(R.id.navbar);
         btn_add = findViewById(R.id.btn_add);
+
+
+        DB = new DbHelper(this);
+        loadListView();
+
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -57,12 +81,28 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
-                builder.setView(R.layout.popup_layout);
-                builder.setTitle("Track Workout: ");
-                builder.setCancelable(true);
+
+                final View customLayout = getLayoutInflater().inflate(R.layout.popup_layout, null);
+                builder.setView(customLayout);
+
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
+                        EditText input_weight = customLayout.findViewById(R.id.et_weight);
+                        EditText input_workout = customLayout.findViewById(R.id.et_workout);
+                        EditText input_sets = customLayout.findViewById(R.id.et_sets);
+                        EditText input_reps = customLayout.findViewById(R.id.et_reps);
+                        EditText input_date = customLayout.findViewById(R.id.et_date);
+
+                        String description = "Workout: " + input_workout.getText().toString() + "\tSets: "
+                                + input_sets.getText().toString() + "\tReps: " + input_reps.getText().toString()
+                                + "\tWeight: " + input_weight.getText().toString();
+                        String date = input_date.getText().toString();
+                        addNewWorkoutHistory(description, date);
+
+
+                        dialogInterface.cancel();
+
                         //add new record to db here
                     }
                 });
@@ -77,7 +117,21 @@ public class HistoryActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+    }
 
+    private void addNewWorkoutHistory(String desc, String date)
+    {
+        boolean insert = DB.insertWorkouts(MainActivity.getUsername(), desc, date);
+        loadListView();
+    }
+
+    public void loadListView()
+    {
+        ArrayList<HashMap<String, String>> historyList = DB.displayWorkoutHistory(MainActivity.getUsername());
+        ListView lv = (ListView) findViewById(R.id.lv_history);
+        ListAdapter adapter = new SimpleAdapter(HistoryActivity.this, historyList, R.layout.history_row, new String[] {"date", "desc"},
+                new int[] {R.id.date, R.id.desc});
+        lv.setAdapter(adapter);
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -86,4 +140,6 @@ public class HistoryActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

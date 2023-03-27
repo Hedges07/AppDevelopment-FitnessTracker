@@ -1,9 +1,16 @@
 package com.example.fitnessapp;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.sql.SQLInput;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -96,6 +103,21 @@ public class DbHelper extends SQLiteOpenHelper {
         else {
             return false;
         }
+    }
 
+    @SuppressLint("Range")
+    public ArrayList<HashMap<String, String>> displayWorkoutHistory(String username) {
+        SQLiteDatabase db = getWritableDatabase();
+        ArrayList<HashMap<String, String>> historyList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT description, date FROM workouts WHERE username=?", new String[] {username}, null);
+
+        while(cursor.moveToNext())
+        {
+            HashMap<String, String> history = new HashMap<>();
+            history.put("desc", cursor.getString(cursor.getColumnIndex("description")));
+            history.put("date", cursor.getString(cursor.getColumnIndex("date")));
+            historyList.add(history);
+        }
+        return historyList;
     }
 }

@@ -63,7 +63,7 @@ public class loginActivity extends AppCompatActivity {
                 username = tv_username.getText().toString();
                 password = tv_password.getText().toString();
 
-                DB.insertWorkouts(username, "Curls", "3-23-2023");  //This adds a sample workout when logging in
+                //DB.insertWorkouts(username, "Curls", "3-23-2023");  //This adds a sample workout when logging in
 
                 if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
                     Toast.makeText(getApplicationContext(),"Please Enter All Fields",Toast.LENGTH_SHORT).show();  ;
@@ -73,6 +73,7 @@ public class loginActivity extends AppCompatActivity {
                     if(checkUserPass) {
                         Toast.makeText(getApplicationContext(),"Logged In",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(loginActivity.this, MainActivity.class);
+                        intent.putExtra("userID", username);
                         startActivity(intent);
                     }
                     else {
