@@ -120,4 +120,15 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return historyList;
     }
+
+    public Cursor deleteHistory(String description, String date)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM workouts WHERE description=? AND date=?", new String[] {description,date});
+        if(cursor.getCount()>0)
+        {
+            db.delete("workouts", "description=? AND date=?", new String[] {description, date});
+        }
+        return cursor;
+    }
 }
