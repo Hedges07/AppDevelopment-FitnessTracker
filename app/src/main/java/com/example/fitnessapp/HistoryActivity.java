@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,11 +34,14 @@ public class HistoryActivity extends AppCompatActivity {
 
     Button btn_add;
 
+    ListView lv;
+
     EditText et_workout, et_sets, et_reps, et_date;
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
+    public static ArrayList historyList;
 
 
     DbHelper DB;
@@ -51,6 +56,8 @@ public class HistoryActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.my_drawer_layout);
         NavigationView navView = findViewById(R.id.navbar);
         btn_add = findViewById(R.id.btn_add);
+        lv = (ListView) findViewById(R.id.lv_history);
+
 
 
         DB = new DbHelper(this);
@@ -82,6 +89,36 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("long click!", "index: " + i);
+                AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
+                builder.setTitle("Delete Workout?");
+                builder.setMessage("Are you sure you want to delete this workout?");
+
+                builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    Object item = historyList.get(i);
+                    String[] itemValues = item.toString().split(",");
+                    String[] dateValues = itemValues[0].split("=");
+                    String[] description = itemValues[1].split("=");
+
+                    String date = dateValues[1];
+                    String desc = description[1].replace("}", "");
+
+                    DB.deleteHistory(desc, date);
+                    loadListView();
+                    dialog.cancel();
+                });
+
+                builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                return false;
+            }
+        });
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +145,6 @@ public class HistoryActivity extends AppCompatActivity {
 
                         dialogInterface.cancel();
 
-                        //add new record to db here
                     }
                 });
 
@@ -132,8 +168,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void loadListView()
     {
-        ArrayList<HashMap<String, String>> historyList = DB.displayWorkoutHistory(MainActivity.getUsername());
-        ListView lv = (ListView) findViewById(R.id.lv_history);
+        historyList = DB.displayWorkoutHistory(MainActivity.getUsername());
         ListAdapter adapter = new SimpleAdapter(HistoryActivity.this, historyList, R.layout.history_row, new String[] {"date", "desc"},
                 new int[] {R.id.date, R.id.desc});
         lv.setAdapter(adapter);
