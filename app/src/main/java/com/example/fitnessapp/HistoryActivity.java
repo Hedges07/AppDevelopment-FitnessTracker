@@ -47,6 +47,7 @@ public class HistoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Intent intent_home = new Intent(HistoryActivity.this, MainActivity.class);
         Intent intent_favourites = new Intent(HistoryActivity.this, FavouritesActivity.class);
+        Intent intent_login = new Intent(HistoryActivity.this, loginActivity.class);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         NavigationView navView = findViewById(R.id.navbar);
         btn_add = findViewById(R.id.btn_add);
@@ -65,6 +66,10 @@ public class HistoryActivity extends AppCompatActivity {
                 if(itemTitle.equals("Favourites"))
                 {
                     startActivity(intent_favourites);
+                }
+                if(itemTitle.equals("Logout"))
+                {
+                    startActivity(intent_login);
                 }
                 DrawerLayout drawer = findViewById(R.id.my_drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
