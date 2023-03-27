@@ -92,7 +92,6 @@ public class HistoryActivity extends AppCompatActivity {
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("long click!", "index: " + i);
                 AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
                 builder.setTitle("Delete Workout?");
                 builder.setMessage("Are you sure you want to delete this workout?");
