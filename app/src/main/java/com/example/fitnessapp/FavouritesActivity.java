@@ -23,6 +23,7 @@ public class FavouritesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Intent intent_home = new Intent(FavouritesActivity.this, MainActivity.class);
         Intent intent_history = new Intent(FavouritesActivity.this, HistoryActivity.class);
+        Intent intent_login = new Intent(FavouritesActivity.this, loginActivity.class);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         NavigationView navView = findViewById(R.id.navbar);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -30,11 +31,15 @@ public class FavouritesActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 String itemTitle = item.getTitle().toString();
                 if(itemTitle.equals("Home")){
-                    startActivity(intent_home); //temp
+                    startActivity(intent_home);
                 }
                 if(itemTitle.equals("Workout History"))
                 {
                     startActivity(intent_history);
+                }
+                if(itemTitle.equals("Logout"))
+                {
+                    startActivity(intent_login);
                 }
                 DrawerLayout drawer = findViewById(R.id.my_drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
