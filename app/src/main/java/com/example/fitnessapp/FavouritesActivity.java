@@ -4,6 +4,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,6 +20,8 @@ public class FavouritesActivity extends AppCompatActivity {
     DbHelper DB;
     ArrayList<String> favorites = new ArrayList<String>();
     String username;
+
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,18 @@ public class FavouritesActivity extends AppCompatActivity {
 
         favorites = (DB.getFavWorkoutNames(username));
         System.out.println("The favorites for " + username + " are " + favorites);
+
+        recyclerView = findViewById(R.id.recyclerViewFavorites);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        ArrayList<CategoryData> arrayListFavorites = new ArrayList<>();
+
+        for (int i =0; i < favorites.size();i++){
+            arrayListFavorites.add(new CategoryData(favorites.get(i).toString()));
+        }
+
+        MyAdapter adapterFav = new MyAdapter(arrayListFavorites, FavouritesActivity.this);
+        recyclerView.setAdapter(adapterFav);
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
