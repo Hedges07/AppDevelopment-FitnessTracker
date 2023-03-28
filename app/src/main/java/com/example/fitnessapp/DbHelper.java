@@ -5,13 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import java.sql.SQLInput;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 public class DbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Login.db";
@@ -24,7 +19,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE table users(username TEXT, password TEXT)");
         db.execSQL("CREATE table workouts(username TEXT, description TEXT, date TEXT)");
-        db.execSQL("CREATE table favWorkouts(username TEXT, description TEXT)");
+        db.execSQL("CREATE table favWorkouts(username TEXT, name TEXT)");
     }
 
     @Override
@@ -52,13 +47,13 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean insertFavWorkouts(String username, String description) {
+    public boolean insertFavWorkouts(String username, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", username);
-        values.put("description", description);
+        values.put("name", name);
 
-        long result = db.insert("FavWorkouts", null, values);
+        long result = db.insert("favWorkouts", null, values);
 
         if (result == -1) {
             return false;
@@ -71,7 +66,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public boolean insertUsernamePassword(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        ContentValues values2 = new ContentValues();
         values.put("username", username);
         values.put("password", password);
 
@@ -103,6 +97,23 @@ public class DbHelper extends SQLiteOpenHelper {
         else {
             return false;
         }
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<String> getFavWorkoutNames(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<String> favoriteNames = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT name FROM favWorkouts WHERE username=?", new String[] {username});
+        if(cursor.moveToFirst()) {
+          while(!cursor.isAfterLast()) {
+              String name = cursor.getString(cursor.getColumnIndex("name"));
+              if(!favoriteNames.contains(name)) {
+                  favoriteNames.add(name);
+              }
+              cursor.moveToNext();
+          }
+        }
+        return favoriteNames;
     }
 
     @SuppressLint("Range")

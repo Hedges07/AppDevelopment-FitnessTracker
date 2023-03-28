@@ -9,12 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
-
-
 public class MainActivity extends AppCompatActivity {
 
     CardView cardView;
