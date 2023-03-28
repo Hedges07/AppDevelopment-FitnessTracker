@@ -1,6 +1,5 @@
 package com.example.fitnessapp;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
@@ -8,19 +7,17 @@ import android.widget.MediaController;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.VideoView;
-
 import java.util.ArrayList;
 
 public class workout_view extends AppCompatActivity {
-
     VideoView workout_video;
     TextView workout_title, workout_description;
-
     String video_url;
     int video_id;
-
-     static ArrayList<String> favorites = new ArrayList<String>();
+    DbHelper DB;
+    static ArrayList<String> favorites = new ArrayList<String>();
     View favoritesView;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +28,16 @@ public class workout_view extends AppCompatActivity {
         workout_title = findViewById(R.id.workout_title);
         workout_description = findViewById(R.id.workoutDescription);
         favoritesView = findViewById(R.id.favourite_check);
+        DB = new DbHelper(this);
+        username = MainActivity.getUsername();
 
-
-        //TODO:: NEED TO SET UP TO WORK WITH USERNAME
-        for(int i = 0; i < favorites.size(); i++) {
-            if(favorites.get(i).equals(getIntent().getStringExtra("workout_title"))) {
-                favoritesView.setBackgroundColor(Color.YELLOW);
-            }
+        favorites = (DB.getFavWorkoutNames(username));
+        if (favorites.contains(getIntent().getStringExtra("workout_title"))) {
+            favoritesView.setBackgroundColor(Color.YELLOW);
         }
 
         //Get extras from intent and set url, title and description
+
         //Title
         workout_title.setText(getIntent().getStringExtra("workout_title"));
         //Description
@@ -59,8 +56,7 @@ public class workout_view extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(workout_view.this, FavouritesActivity.class);
-                favorites.add(getIntent().getStringExtra("workout_title"));
-                intent.putStringArrayListExtra("Favorites", favorites);
+                DB.insertFavWorkouts(username,getIntent().getStringExtra("workout_title"));
                 startActivity(intent);
             }
         });
