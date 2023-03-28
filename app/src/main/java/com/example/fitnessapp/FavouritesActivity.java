@@ -12,10 +12,14 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class FavouritesActivity extends AppCompatActivity {
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+    DbHelper DB;
+    ArrayList<String> favorites = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,14 @@ public class FavouritesActivity extends AppCompatActivity {
         Intent intent_login = new Intent(FavouritesActivity.this, loginActivity.class);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         NavigationView navView = findViewById(R.id.navbar);
+        DB = new DbHelper(this);
+
+        favorites = intent.getStringArrayListExtra("Favorites");
+        System.out.println("The favorites are " + favorites);
+
+        //TODO:: So I have the name here, but I dont know how to add it to the card view like the rest of them
+        //       and make it clickable. It also need to be set up to work with the username
+        //       or it will show everyones favorites
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
