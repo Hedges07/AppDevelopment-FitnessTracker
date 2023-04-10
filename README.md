@@ -2,7 +2,11 @@
 4200 Project
 Fitness App 
 
- 
+Main Contributions:
+- Database requirements (Tyler Johnston)
+- Functionality for favouriting workouts (Adam Taylor)
+- Displaying workout details  (Bryce Hughson)
+- Workout history tracking (Marina Zjalic)
 
 Database Requirement 
 
@@ -16,14 +20,10 @@ Main page – Have categories such as favorited, chest, leg, arm etc.
 
 After picking a category – Be presented by multiple workouts: Add to favorite, description, attach gif/video on each workout 
 
-Tracking workout routines - (something you personally fill out for reps/weight. Chart of how much you did per day). Edit your favorite workouts (Add and delete workouts)  
+Tracking workout routines - (something you personally fill out for reps/weight)
 
 Profile – Put your height, weight, goals, and view your favorited workouts (chart to display progress weekly weigh ins).  
 
-Settings – Dark mode, logout 
 
-Icons and visuals if needed. 
-
-https://fontawesome.com/icons 
 
  
